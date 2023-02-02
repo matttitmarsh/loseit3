@@ -29,6 +29,8 @@ gem "jbuilder"
 
 gem 'bootstrap-sass', '~> 3.3.6'
 
+gem 'bootstrap_form'
+
 gem 'sass-rails', '>= 3.2'
 
 gem 'jquery-rails'
