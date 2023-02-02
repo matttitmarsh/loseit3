@@ -1,0 +1,10 @@
+.container
+  %h2.title New Weight Record for #{@competition.title}
+
+  = form_with model: [:competition, @weight_record]  do |f|
+    = f.label :weight, class: "form-label"
+    = f.number_field :weight, class: "form-control", step: 0.1
+    = f.label :effective_date, class: "form-label"
+    = f.date_field :effective_date, class: "form-control"
+
+    = f.submit 'Create Weight Record', class: "btn btn-success"

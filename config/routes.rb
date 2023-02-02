@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  resources :competitions
+  resources :competitions do
+    resources :weight_records
+  end
   resources :enrollments, only: [:create, :destroy, :update]
 end
