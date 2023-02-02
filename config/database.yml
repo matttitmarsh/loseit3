@@ -20,12 +20,12 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: loseit
-  password: <%= ENV['APPNAME_DATABASE_PASSWORD'] %>
+  username: loseit3
+  password: <%= ENV['LOSEIT3_DATABASE_PASSWORD'] %>
 
 development:
   <<: *default
-  database: loseit_development
+  database: loseit3_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -59,7 +59,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: loseit_test
+  database: loseit3_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -83,6 +83,6 @@ test:
 #
 production:
   <<: *default
-  database: loseit_production
-  username: loseit
-  password: <%= ENV["LOSEIT_DATABASE_PASSWORD"] %>
+  database: loseit3_production
+  username: loseit3
+  password: <%= ENV["LOSEIT3_DATABASE_PASSWORD"] %>
