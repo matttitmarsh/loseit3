@@ -1,40 +1,23 @@
 <%= form_with(model: @competition, local: true) do |f| %>
-  <div class="card">
-    <div class="card-body">
+  <div class="container">
+    <div class="title">
+      <%= f.label :title, class: "form-label" %>
+      <%= f.text_field :title, class: "form-control", placeholder: "Enter the Competition Title", autofocus: true %>
+    </div>
 
-      <div class="mb-3">
-        <div class="title">
-          <%= f.label :title, class: "form-label" %>
-          <%= f.text_field :title, class: "form-control", placeholder: "Enter the Competition Title", autofocus: true %>
-        </div>
-      </div>
+    <div class="start-date">
+      <%= f.label :start_date, class: "form-label" %>
+      <%= f.date_field :start_date, type: "date", class: "form-control" %>
+    </div>
 
-      <div class="mb-3">
-        <div class="start-date">
-          <%= f.label :start_date, class: "form-label" %>
-          <%= f.date_field :start_date, type: "date", class: "form-control" %>
-        </div>
-      </div>
+    <div class="finish-date">
+      <%= f.label :finish_date, class: "form-label" %>
+      <%= f.date_field :finish_date, type: "date", class: "form-control" %>
+    </div>
 
-      <div class="mb-3">
-        <div class="finish-date">
-          <%= f.label :finish_date, class: "form-label" %>
-          <%= f.date_field :finish_date, type: "date", class: "form-control" %>
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <div class="create">
-          <%= f.submit "Create Competition", class:"btn btn-default" %>
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <div class="cancel">
-          <%= link_to 'Cancel', root_path, class:"btn btn-default" %>
-        </div>
-      </div>
+    <div class="submit-cancel">
+      <%= f.submit "Create Competition", class:"btn btn-success" %>
+      <%= link_to 'Cancel', root_path, class:"btn btn-danger" %>
     </div>
   </div>
-
 <% end %>

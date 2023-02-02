@@ -1,83 +1,68 @@
-<h2><%= @competition.title %></h2>
+<div class="container">
+  <h2><%= @competition.title %></h2>
+  <%= link_to 'New Weight Record', new_competition_weight_record_path(@competition), class: "btn btn-success" %>
 
-<div>
-  <div class="card">
-    <div class="card-header">
-      <p class="card-header-title">start date: <%= @competition.start_date %></p>
+  <div>
+    <span class="badge bg-secondary"><%= @competition.start_date %> to <%= @competition.finish_date %></span>
+  </div>
+
+  <%= line_chart @competition.weight_records.group_by(&:user).map { |user, weight_records|
+      {name: user.name, data: weight_records.pluck(:effective_date, :weight)}
+  } %>
+
+  <div class="container">
+    <h2>Competitors</h2>
+    <div class="table-responsive">
+      <table class="table" id="sortTable">
+        <thead>
+          <tr>
+            <th data-field="name">Competitor</th>
+            <th data-field="weight">Starting Weight</th>
+            <th data-field="weight">Most Recent Weight</th>
+            <th data-field="weight">Difference</th>
+            <th data-field="weight">Percent Lost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% earliest_and_latest_weight_record_by_user.each do |user, weight_records| %>
+            <% earliest = weight_records[:earliest] %>
+            <% latest = weight_records[:latest] %>
+            <tr>
+              <td><%= user.name %></td>
+              <td><%= earliest.weight %>kg</td>
+              <td><%= latest.weight %>kg</td>
+              <td><%= latest.weight - earliest.weight %>kg</td>
+              <td><%= ((100 - (latest.weight / earliest.weight) * 100)).round(2) %>%</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
-  <div class="column">
-    <div class="card">
-      <div class="card-header">
-        <p class="card-header-title is-centered">finish date: <%= @competition.finish_date %></p>
-      </div>
+
+  <br/>
+
+  <div class="container">
+    <h2>Weigh Ins</h2>
+    <div class="table-responsive">
+      <table class="table" id="sortTable">
+        <thead>
+          <tr>
+            <th data-field="date" data-sortable="true" >Date</th>
+            <th data-field="name">Competitor</th>
+            <th data-field="weight">Weight</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @competition.weight_records.preload(:user).default_order.each do |record| %>
+            <tr>
+              <td><%= record.effective_date %></td>
+              <td><%= record.user.name %></td>
+              <td><%= record.weight %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
-
-<%= line_chart @competition.weight_records.group_by(&:user).map { |user, weight_records|
-    {name: user.name, data: weight_records.pluck(:effective_date, :weight)}
-} %>
-
-<div class="container">
-  <h2>Competitors</h2>
-  <div class="table-responsive">
-    <table class="table" id="sortTable">
-      <thead>
-        <tr>
-          <th data-field="name">Competitor</th>
-          <th data-field="weight">Starting Weight</th>
-          <th data-field="weight">Most Recent Weight</th>
-          <th data-field="weight">Difference</th>
-          <th data-field="weight">Percent Lost</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% earliest_and_latest_weight_record_by_user.each do |user, weight_records| %>
-          <% earliest = weight_records[:earliest] %>
-          <% latest = weight_records[:latest] %>
-          <tr>
-            <td><%= user.name %></td>
-            <td><%= earliest.weight %>kg</td>
-            <td><%= latest.weight %>kg</td>
-            <td><%= latest.weight - earliest.weight %>kg</td>
-            <td><%= ((100 - (latest.weight / earliest.weight) * 100)).round(2) %>%</td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<br/>
-
-<div class="container">
-  <h2>Weigh Ins</h2>
-  <div class="table-responsive">
-    <table class="table" id="sortTable">
-      <thead>
-        <tr>
-          <th data-field="date" data-sortable="true" >Date</th>
-          <th data-field="name">Competitor</th>
-          <th data-field="weight">Weight</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @competition.weight_records.preload(:user).default_order.each do |record| %>
-          <tr>
-            <td><%= record.effective_date %></td>
-            <td><%= record.user.name %></td>
-            <td><%= record.weight %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<%= link_to 'Home', root_path, class: "button" %>
-<%= link_to 'New Weight Record', new_competition_weight_record_path(@competition), class: "button" %>
-
-<!--TODO: Add invitees and attendees list-->
-
-<!--TODO: Add ability to invite and uninvite people-->
