@@ -1,9 +1,8 @@
 class CompetitionsController < ApplicationController
   include CompetitionsHelper
-  before_action :require_login, except: [:index]
 
   def index
-    @competitions = Competitions.all
+    @competitions = Competition.all
   end
 
   def show
@@ -18,7 +17,7 @@ class CompetitionsController < ApplicationController
     @competition = current_user.competitions.build(competition_params)
 
     if @competition.save
-      flash[:success] = "Competition '#{@competition.name}' created!"
+      flash[:success] = "Competition '#{@competition.title}' created!"
       redirect_to @competition
     else
       flash[:alert] = "Some error!"

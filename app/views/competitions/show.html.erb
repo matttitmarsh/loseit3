@@ -1,0 +1,28 @@
+<h2><%= @competition.title %></h2>
+<div>
+  <p><small>Created by</small></p>
+  <h4><%= @competition.creator.name %></h4>
+</div>
+
+<div>
+  <div class="card">
+    <div class="card-header">
+      <p class="card-header-title">start date: <%= @competition.start_date %></p>
+    </div>
+  </div>
+  <div class="column">
+    <div class="card">
+      <div class="card-header">
+        <p class="card-header-title is-centered">finish date: <%= @competition.finish_date %></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br/>
+
+<%= link_to 'Home', root_path, class: "button" %>
+
+<!--TODO: Add invitees and attendees list-->
+
+<!--TODO: Add ability to invite and uninvite people-->

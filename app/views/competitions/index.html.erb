@@ -1,0 +1,25 @@
+<div class="container">
+  <h2>Competitions</h2>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Start Date</th>
+          <th>Finish Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @competitions.each do |competition| %>
+          <tr>
+            <td><%= link_to competition.title, competition_path(competition) %></td>
+            <td><%= competition.start_date %></td>
+            <td><%= competition.finish_date %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%= link_to 'Home', root_path, class: "button" %>
