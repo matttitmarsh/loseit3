@@ -15,6 +15,10 @@
   </div>
 </div>
 
+<%= line_chart @competition.weight_records.group_by(&:user).map { |user, weight_records|
+    {name: user.name, data: weight_records.pluck(:effective_date, :weight)}
+} %>
+
 <div class="container">
   <h2>Competitors</h2>
   <div class="table-responsive">
