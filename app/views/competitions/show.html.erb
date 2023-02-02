@@ -17,6 +17,30 @@
 
 <br/>
 
+<div class="container">
+  <h2>Weigh Ins</h2>
+  <div class="table-responsive">
+    <table class="table" id="sortTable">
+      <thead>
+        <tr>
+          <th data-field="date" data-sortable="true" >Date</th>
+          <th data-field="name">Competitor</th>
+          <th data-field="weight">Weight</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @competition.weight_records.each do |record| %>
+          <tr>
+            <td><%= record.effective_date %></td>
+            <td><%= record.user.name %></td>
+            <td><%= record.weight %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 <%= link_to 'Home', root_path, class: "button" %>
 <%= link_to 'New Weight Record', new_competition_weight_record_path(@competition), class: "button" %>
 
