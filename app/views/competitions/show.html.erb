@@ -29,6 +29,7 @@
           <th data-field="weight">Starting Weight</th>
           <th data-field="weight">Most Recent Weight</th>
           <th data-field="weight">Difference</th>
+          <th data-field="weight">Percent Lost</th>
         </tr>
       </thead>
       <tbody>
@@ -40,6 +41,7 @@
             <td><%= earliest.weight %>kg</td>
             <td><%= latest.weight %>kg</td>
             <td><%= latest.weight - earliest.weight %>kg</td>
+            <td><%= ((100 - (latest.weight / earliest.weight) * 100)).round(2) %>%</td>
           </tr>
         <% end %>
       </tbody>
