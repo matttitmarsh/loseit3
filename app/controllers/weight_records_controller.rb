@@ -1,4 +1,6 @@
 class WeightRecordsController < ApplicationController
+  before_action :authenticate_user!
+
   def new
     @weight_record = competition.weight_records.build(
       effective_date: Time.zone.now

@@ -1,5 +1,6 @@
 class CompetitionsController < ApplicationController
   include CompetitionsHelper
+  before_action :authenticate_user!
 
   def index
     @competitions = Competition.all

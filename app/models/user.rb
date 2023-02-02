@@ -7,5 +7,5 @@ class User < ApplicationRecord
 
   has_many :competitors
   has_many :competitions, through: :competitors
-  has_many :weight_records
+  has_many :weight_records, dependent: :destroy
 end
