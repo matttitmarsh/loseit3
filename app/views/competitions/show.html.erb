@@ -1,7 +1,8 @@
 <div class="container">
   <h2><%= @competition.title %></h2>
   <%= link_to 'New Weight Record', new_competition_weight_record_path(@competition), class: "btn btn-success" %>
-
+  <%= link_to 'Edit Competition', edit_competition_path(@competition), class: "btn btn-primary" %>
+  <%= link_to 'Destroy', @competition, data: { confirm: "Are you sure?" }, :method => :delete, class: "btn btn-danger"%>
   <div>
     <span class="badge bg-secondary"><%= @competition.start_date %> to <%= @competition.finish_date %></span>
   </div>
