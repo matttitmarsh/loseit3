@@ -45,6 +45,12 @@ class CompetitionsController < ApplicationController
     end
   end
 
+  def destroy
+    @competition = Competition.find(params[:id])
+    @competition.destroy
+    redirect_to root_path
+  end
+
   private
 
   helper_method def earliest_and_latest_weight_record_by_user
