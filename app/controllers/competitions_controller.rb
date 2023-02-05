@@ -26,6 +26,25 @@ class CompetitionsController < ApplicationController
     end
   end
 
+  def edit
+    @competition = Competition.find(params[:id])
+  end
+
+  def update
+    @competition = Competition.find(params[:id])
+    respond_to do |format|
+      if @competition.update(competition_params)
+        format.html { redirect_to(@competition,
+          :notice => 'Competition was successfully updated!.') }
+        format.xml { head :ok }
+      else
+        format.html {render :action => "edit" }
+        format.xml { render :xml => @competition.errors,
+                      :status => :unprocessessable_entity }
+      end
+    end
+  end
+
   private
 
   helper_method def earliest_and_latest_weight_record_by_user
