@@ -20,6 +20,31 @@ class WeightRecordsController < ApplicationController
     end
   end
 
+  def edit
+    @weight_record = competition.weight_records.find(params[:id])
+  end
+
+  def update
+    @weight_record = competition.weight_records.find(params[:id])
+    respond_to do |format|
+      if @weight_record.update(weight_record_params)
+        format.html { redirect_to(competition,
+          :notice => 'Weight Record was successfully updated!.') }
+        format.xml { head :ok }
+      else
+        format.html {render :action => "edit" }
+        format.xml { render :xml => @weight_record.errors,
+                      :status => :unprocessessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    competition.weight_records.find(params[:id]).destroy
+    flash[:notice] = "Record deleted"
+    redirect_to competition_path(competition)
+  end
+
   private
 
   def competition
