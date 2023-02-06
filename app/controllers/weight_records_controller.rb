@@ -39,6 +39,12 @@ class WeightRecordsController < ApplicationController
     end
   end
 
+  def destroy
+    competition.weight_records.find(params[:id]).destroy
+    flash[:notice] = "Record deleted"
+    redirect_to competition_path(competition)
+  end
+
   private
 
   def competition
