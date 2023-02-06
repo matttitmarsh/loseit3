@@ -56,6 +56,7 @@
             <th data-field="date" data-sortable="true" >Date</th>
             <th data-field="name">Competitor</th>
             <th data-field="weight">Weight</th>
+            <th data-field="action">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -64,6 +65,13 @@
               <td><%= record.effective_date %></td>
               <td><%= record.user.name %></td>
               <td><%= record.weight %></td>
+              <% wr = record.id %>
+              <% puts wr%>
+              <% if record.user_id == current_user.id %>
+                <td><%= link_to 'Edit', edit_competition_weight_record_path(@competition.id, record.id), class: "btn btn-success btn-sm" %>
+              <% else %>
+                <td></td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>
