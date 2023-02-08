@@ -44,7 +44,9 @@ class WeightRecordsController < ApplicationController
   end
 
   def destroy
-    competition.weight_records.find(params[:id]).destroy
+    @weight_record = competition.weight_records.find(params[:id])
+    authorize @weight_record
+    @weight_record.destroy
     flash[:notice] = "Record deleted"
     redirect_to competition_path(competition)
   end
