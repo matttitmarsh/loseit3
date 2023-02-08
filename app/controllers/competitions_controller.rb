@@ -28,27 +28,8 @@ class CompetitionsController < ApplicationController
 
   def edit
     @competition = Competition.find(params[:id])
-  end
-
-  def update
-    @competition = Competition.find(params[:id])
-    respond_to do |format|
-      if @competition.update(competition_params)
-        format.html { redirect_to(@competition,
-          :notice => 'Competition was successfully updated!.') }
-        format.xml { head :ok }
-      else
-        format.html {render :action => "edit" }
-        format.xml { render :xml => @competition.errors,
-                      :status => :unprocessessable_entity }
-      end
-    end
-  end
-
-  def destroy
-    @competition = Competition.find(params[:id])
-    @competition.destroy
-    redirect_to root_path
+    flash[:alert] = "You do not have access to this page"
+    redirect_to @competition
   end
 
   private
