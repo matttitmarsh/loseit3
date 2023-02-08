@@ -22,10 +22,14 @@ class WeightRecordsController < ApplicationController
 
   def edit
     @weight_record = competition.weight_records.find(params[:id])
+    authorize @weight_record
   end
 
   def update
     @weight_record = competition.weight_records.find(params[:id])
+
+    authorize @weight_record
+
     respond_to do |format|
       if @weight_record.update(weight_record_params)
         format.html { redirect_to(competition,
