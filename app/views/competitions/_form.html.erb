@@ -16,8 +16,8 @@
     </div>
 
     <div class="submit-cancel">
-      <%= f.submit ( f.object.new_record? ? "Create Competition" : "Update Competition" ), class:"btn btn-success" %>
-      <%= link_to 'Cancel', ( f.object.new_record? ? root_path : @competition ), class:"btn btn-danger" %>
+      <%= f.submit "Create Competition", class:"btn btn-success" %>
+      <%= link_to 'Cancel',root_path, class:"btn btn-danger" %>
     </div>
   </div>
 <% end %>
