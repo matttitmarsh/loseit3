@@ -47,6 +47,10 @@ gem "chartkick"
 
 gem 'pundit'
 
+gem "administrate"
+
+gem 'bourbon'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
