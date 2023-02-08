@@ -8,4 +8,7 @@ class User < ApplicationRecord
   has_many :competitors
   has_many :competitions, through: :competitors
   has_many :weight_records, dependent: :destroy
+
+  validates :name, uniqueness: true, presence: true, format: { with: /\A[a-zA-Z]+([a-zA-Z]|\d)*\Z/ }
+
 end

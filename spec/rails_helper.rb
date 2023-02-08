@@ -9,6 +9,10 @@ require 'rspec/rails'
 
 require 'capybara/rails'
 require 'capybara/rspec'
+include Capybara::DSL
+
+include Warden::Test::Helpers
+Warden.test_mode!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
