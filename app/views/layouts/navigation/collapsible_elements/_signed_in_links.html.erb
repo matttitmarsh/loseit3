@@ -19,3 +19,8 @@
 <li class="mobile-menu">
   <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
 </li>
+<li class="mobile-menu">
+  <% if current_user.type == "AdminUser" %>
+    <%= link_to 'Admin', admin_root_path %>
+  <% end %>
+</li>
